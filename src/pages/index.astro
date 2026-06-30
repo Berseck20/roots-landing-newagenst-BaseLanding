@@ -1,0 +1,35 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Navigation from '@components/layout/Navigation.astro'
+import Footer from '@components/layout/Footer.astro'
+import Hero from '@components/sections/Hero.astro'
+import FeaturedProject from '@components/sections/FeaturedProject.astro'
+import Gallery from '@components/sections/Gallery.astro'
+import Services from '@components/sections/Services.astro'
+import Testimonials from '@components/sections/Testimonials.tsx'
+import Process from '@components/sections/Process.astro'
+import Trust from '@components/sections/Trust.astro'
+import FAQ from '@components/sections/FAQ.astro'
+import CTAForm from '@components/sections/CTAForm.tsx'
+import StickyBar from '@components/sections/StickyBar.tsx'
+
+import { testimonials } from '@data/testimonials'
+import { faq } from '@data/faq'
+---
+
+<Layout>
+  <Navigation />
+  <main id="main-content">
+    <Hero />
+    <FeaturedProject />
+    <Gallery />
+    <Services />
+    {testimonials.length > 0 && <Testimonials testimonials={testimonials} client:visible />}
+    <Process />
+    <Trust />
+    {faq.length > 0 && <FAQ />}
+    <CTAForm client:idle />
+  </main>
+  <Footer />
+  <StickyBar client:load />
+</Layout>

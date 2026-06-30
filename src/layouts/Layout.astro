@@ -1,0 +1,69 @@
+---
+import '@/styles/global.css'
+import { seo } from '@data/seo'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = seo.title,
+  description = seo.description
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={seo.canonical} />
+
+    <meta property="og:title" content={seo.openGraph.title} />
+    <meta property="og:description" content={seo.openGraph.description} />
+    <meta property="og:type" content={seo.openGraph.type} />
+    <meta property="og:locale" content={seo.openGraph.locale} />
+    <meta property="og:site_name" content={seo.openGraph.siteName} />
+    {seo.openGraph.image && <meta property="og:image" content={seo.openGraph.image} />}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(seo.schema.localBusiness)} />
+    {seo.schema.faq && (
+      <script type="application/ld+json" set:html={JSON.stringify(seo.schema.faq)} />
+    )}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-text-on-primary focus:rounded-md"
+    >
+      Skip to main content
+    </a>
+    <slot />
+  </body>
+</html>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  )
+
+  document.querySelectorAll('[data-reveal], .stagger').forEach((el) => {
+    observer.observe(el)
+  })
+</script>

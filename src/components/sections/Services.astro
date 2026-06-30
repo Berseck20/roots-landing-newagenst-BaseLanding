@@ -1,0 +1,42 @@
+---
+import { services } from '@data/services'
+---
+
+<section id="services" class="py-section bg-background" data-reveal>
+  <div class="max-w-[1200px] mx-auto px-container">
+    <div class="text-center mb-12">
+      <h2 class="font-heading font-bold text-h2 text-text-primary mb-4">
+        Landscape Design &amp; Outdoor Lighting
+      </h2>
+      <p class="text-text-secondary text-body max-w-[640px] mx-auto">
+        From Concept to Completion
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      {services.map((service) => (
+        <div class="bg-surface rounded-xl shadow-md border border-border overflow-hidden hover:shadow-lg transition-shadow group">
+          <div class="aspect-[16/9] bg-gradient-to-br from-primary/10 to-primary-light/10 flex items-center justify-center">
+            <div class="text-center p-6">
+              <p class="text-text-secondary text-body-sm">{service.name} — Project Example</p>
+            </div>
+          </div>
+          <div class="p-6 lg:p-8">
+            <h3 class="font-heading font-semibold text-h3 text-text-primary mb-3">{service.name}</h3>
+            <p class="text-text-secondary text-body mb-5">{service.description}</p>
+            {service.features.length > 0 && (
+              <ul class="space-y-2.5">
+                {service.features.map((feature) => (
+                  <li class="flex items-start gap-2.5 text-text-primary text-body-sm">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-primary mt-0.5 shrink-0" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

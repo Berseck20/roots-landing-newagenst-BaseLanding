@@ -1,0 +1,100 @@
+---
+import { business } from '@data/business'
+import { team } from '@data/team'
+import { stats } from '@data/stats'
+---
+
+<section id="trust" class="py-section bg-surface-muted" data-reveal>
+  <div class="max-w-[1200px] mx-auto px-container">
+    <div class="text-center mb-12">
+      <h2 class="font-heading font-bold text-h2 text-text-primary mb-4">
+        Certified. Insured. Family-Owned.
+      </h2>
+      <p class="text-text-secondary text-body max-w-[600px] mx-auto">
+        More than the average landscape company — backed by credentials, experience, and a genuine passion for what we do.
+      </p>
+    </div>
+
+    {stats.length > 0 && (
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+        {stats.map((stat) => (
+          <div class="text-center p-6 bg-surface rounded-xl shadow-sm border border-border">
+            <p class="font-heading font-bold text-3xl lg:text-4xl text-primary mb-1">{stat.value}</p>
+            <p class="text-text-secondary text-body-sm">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div>
+        <h3 class="font-heading font-semibold text-h3 text-text-primary mb-6">Professional Credentials</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {business.certifications && business.certifications.map((cert) => (
+            <div class="flex items-start gap-3 p-4 bg-surface rounded-lg border border-border">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary mt-0.5 shrink-0" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <p class="text-text-primary text-body-sm">{cert}</p>
+            </div>
+          ))}
+          {business.licenses && business.licenses.map((lic) => (
+            <div class="flex items-start gap-3 p-4 bg-surface rounded-lg border border-border">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary mt-0.5 shrink-0" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <p class="text-text-primary text-body-sm">{lic}</p>
+            </div>
+          ))}
+          {business.associations && business.associations.map((assoc) => (
+            <div class="flex items-start gap-3 p-4 bg-surface rounded-lg border border-border">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary mt-0.5 shrink-0" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              <p class="text-text-primary text-body-sm">{assoc}</p>
+            </div>
+          ))}
+          {business.insurance && (
+            <div class="flex items-start gap-3 p-4 bg-surface rounded-lg border border-border">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary mt-0.5 shrink-0" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <p class="text-text-primary text-body-sm">{business.insurance}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-heading font-semibold text-h3 text-text-primary mb-6">Meet the Owners</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {team.map((member) => (
+            <div class="bg-surface rounded-xl shadow-md border border-border overflow-hidden">
+              <div class="aspect-[4/5] bg-gradient-to-br from-primary/10 to-primary-light/10 flex items-center justify-center">
+                <div class="text-center p-4">
+                  <p class="text-text-secondary text-body-sm">{member.imageDescription}</p>
+                </div>
+              </div>
+              <div class="p-5">
+                <p class="font-heading font-semibold text-lg text-text-primary">{member.name}</p>
+                <p class="text-text-secondary text-body-sm mb-2">{member.role}</p>
+                {member.bio && (
+                  <p class="text-text-secondary text-caption">{member.bio}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8 p-6 bg-surface rounded-xl border border-border">
+          <p class="text-text-primary text-body-sm leading-relaxed mb-4">
+            &ldquo;From our family to yours, Roots wants to thank you for the opportunity to earn your business.&rdquo;
+          </p>
+          <p class="text-text-secondary text-caption">&mdash; John &amp; Jessica Wurster, Owners</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <a
+        href={`tel:${business.phone?.replace(/\D/g, '')}`}
+        class="inline-flex items-center gap-2 bg-primary text-text-on-primary font-heading font-semibold text-lg px-8 py-4 rounded-md hover:bg-primary-dark transition-colors shadow-md"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call {business.phone}
+      </a>
+    </div>
+  </div>
+</section>

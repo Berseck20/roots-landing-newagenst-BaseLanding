@@ -1,0 +1,74 @@
+---
+import { business } from '@data/business'
+import { navigation } from '@data/navigation'
+---
+
+<footer class="bg-text-primary text-white py-section" role="contentinfo">
+  <div class="max-w-[1200px] mx-auto px-container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+      <div>
+        <h3 class="font-heading font-bold text-xl mb-4 text-white">{business.name}</h3>
+        {business.phone && (
+          <a href={`tel:${business.phone.replace(/\D/g, '')}`} class="block text-white/80 hover:text-white transition-colors mb-2">
+            {business.phone}
+          </a>
+        )}
+        {business.address.full && (
+          <p class="text-white/60 text-body-sm mb-4">{business.address.full}</p>
+        )}
+        {business.socialLinks && business.socialLinks.length > 0 && (
+          <div class="flex gap-3 mt-4">
+            {business.socialLinks.map(link => (
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit us on ${link.platform}`}
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              >
+                <span class="text-white text-body-sm font-medium">{link.platform[0]}</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <h4 class="font-heading font-semibold text-lg mb-4 text-white">Quick Links</h4>
+        <nav class="flex flex-col gap-2" aria-label="Footer navigation">
+          {navigation.filter(item => item.isVisible).map(item => (
+            <a href={item.href} class="text-white/60 hover:text-white transition-colors text-body-sm">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div>
+        <h4 class="font-heading font-semibold text-lg mb-4 text-white">Service Area & Hours</h4>
+        {business.serviceArea && (
+          <p class="text-white/60 text-body-sm mb-4">{business.serviceArea}</p>
+        )}
+        {business.hours && (
+          <div class="space-y-1">
+            {business.hours.map(h => (
+              <p class="text-white/60 text-body-sm flex justify-between max-w-[240px]">
+                <span>{h.day}</span>
+                <span class="text-white/80">{h.hours}</span>
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-white/40 text-caption">
+        &copy; {new Date().getFullYear()} {business.name}. All rights reserved.
+      </p>
+      <p class="text-white/40 text-caption">
+        Licensed &amp; Insured. FNGLA Certified.
+      </p>
+    </div>
+  </div>
+</footer>
